@@ -9,7 +9,7 @@ Equivalent of a DRF view's filtering attributes. Unknown option names throw `Con
 | `model`                   | `queryset.model`            | —                                                     | Sequelize model. Given here, the whole configuration is validated immediately. Can also be passed per call to `apply()`.  |
 | `filterSet`               | `filterset_class`           | `null`                                                | From `defineFilterSet()`.                                                                                                 |
 | `filterFields`            | `filterset_fields`          | —                                                     | Shorthand; types inferred from the model. Not together with `filterSet`.                                                  |
-| `searchFields`            | `search_fields`             | `[]`                                                  | See [README › SearchFilter](../README.md#searchfilter).                                                                   |
+| `searchFields`            | `search_fields`             | `[]`                                                  | See [README › Search](../README.md#search).                                                                               |
 | `getSearchFields`         | `get_search_fields()`       | —                                                     | `(context) => string[]`, evaluated per request.                                                                           |
 | `orderingFields`          | `ordering_fields`           | `[]`                                                  | Array or `'__all__'`. `[]` means clients cannot order.                                                                    |
 | `defaultOrdering`         | `ordering`                  | `[]`                                                  | `'-created_at'` or `['-created_at', 'id']`. Not checked against `orderingFields`.                                         |
@@ -45,7 +45,7 @@ defineFilterSet({ age: { lookups: ['exact', 'gte'] }, username: true, status: ['
 defineFilterSet({ filterFields: ['status'], fields: { min_age: { field: 'age', lookup: 'gte' } } });
 ```
 
-A field definition is an object (options in the [README](../README.md#filterset)), `true` (exact only) or
+A field definition is an object (options in the [README](../README.md#declaring-filters)), `true` (exact only) or
 an array of lookups.
 
 ## `apply(input)` / `applyAsync(input)`

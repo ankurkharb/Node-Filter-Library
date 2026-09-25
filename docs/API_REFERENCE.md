@@ -6,7 +6,7 @@ Everything is exported from the package root: `import { ... } from 'drf-sequeliz
 
 ### `defineFilterSet(fields)` → `FilterSet`
 
-Declare filters. See [README › FilterSet](../README.md#filterset) for the definition options and
+Declare filters. See [README › Declaring filters](../README.md#declaring-filters) for the definition options and
 [CONFIGURATION.md](CONFIGURATION.md#definefiltersetfields) for the accepted forms. Returns a frozen object
 `{ fields: Map<string, Definition>, get(key), keys() }`. Throws `ConfigurationError` for invalid definitions.
 

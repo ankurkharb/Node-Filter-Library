@@ -5,7 +5,8 @@
 //   filter types, lookups, context and method-argument fields, backend
 //   methods, ...) must equal the list the running code has. Checked both ways,
 //   so a new option in src/ without a type fails, and so does a stale type.
-// - docs/*.ts: every ```js example in the docs, which must type-check.
+// - docs/*.js: every ```js example in the docs, which must type-check as
+//   JavaScript (what a Node developer's editor checks).
 
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import * as lib from '../../src/index.js';
@@ -158,16 +159,16 @@ async function writeParity() {
   await writeFile(new URL('runtime-parity.ts', out), `${lines.join('\n')}\n`);
 }
 
-// Names the doc examples use without defining them.
+// Names the doc examples use without defining them, with their types.
 const DOC_GLOBALS = {
-  User: 'ModelStatic<Model<any, any>>',
-  Product: 'ModelStatic<Model<any, any>>',
-  Company: 'ModelStatic<Model<any, any>>',
-  filtering: 'lib.Filtering',
-  filterSet: 'lib.FilterSet',
-  UserFilterSet: 'lib.FilterSet',
-  STATUS_CHOICES: 'lib.Choices',
-  TAG_CHOICES: 'lib.Choices',
+  User: "import('sequelize').ModelStatic<import('sequelize').Model<any, any>>",
+  Product: "import('sequelize').ModelStatic<import('sequelize').Model<any, any>>",
+  Company: "import('sequelize').ModelStatic<import('sequelize').Model<any, any>>",
+  filtering: "import('drf-sequelize-filter').Filtering",
+  filterSet: "import('drf-sequelize-filter').FilterSet",
+  UserFilterSet: "import('drf-sequelize-filter').FilterSet",
+  STATUS_CHOICES: "import('drf-sequelize-filter').Choices",
+  TAG_CHOICES: "import('drf-sequelize-filter').Choices",
   app: 'any',
   req: 'any',
   res: 'any',
@@ -191,18 +192,18 @@ async function writeDocExamples() {
       const imports = exportNames.filter((name) => !unusedImports.includes(name));
       const source = [
         `// Generated from ${file}, example ${index + 1}.`,
-        "import { DataTypes, Model, Op, Sequelize, type ModelStatic } from 'sequelize';",
+        "import { DataTypes, Model, Op, Sequelize } from 'sequelize';",
         "import * as lib from 'drf-sequelize-filter';",
         imports.length > 0 ? `import { ${imports.join(', ')} } from 'drf-sequelize-filter';` : '',
         ...Object.entries(DOC_GLOBALS)
           .filter(([name]) => !defined(name))
-          .map(([name, type]) => `declare const ${name}: ${type};`),
+          .map(([name, type]) => `const ${name} = /** @type {${type}} */ (/** @type {unknown} */ (undefined));`),
         'void [DataTypes, Model, Op, Sequelize, lib];',
         '',
         body,
         'export {};',
       ].join('\n');
-      const name = `${file.replace(/[/.]/g, '_')}_${index + 1}.ts`;
+      const name = `${file.replace(/[/.]/g, '_')}_${index + 1}.js`;
       await writeFile(new URL(`docs/${name}`, out), source);
       count += 1;
     }

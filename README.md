@@ -1,40 +1,167 @@
 # drf-sequelize-filter
 
-**Django REST Framework–style filtering, search and ordering for Node.js + Sequelize + PostgreSQL.**
-
-If you know DRF and django-filter, you already know the query syntax:
+**Ready-made filtering, search and sorting for Node.js APIs built on Sequelize + PostgreSQL.**
+Stop hand-writing `if (req.query.something)` for every field. Say which fields can be filtered, and your
+API understands URLs like this, with validation included:
 
 ```text
-/users/?age__gte=18
-/users/?username__icontains=john
-/users/?status__in=active,pending
-/users/?company__name__icontains=google
-/users/?created_at__year=2024
-/users/?search=john
-/users/?ordering=-created_at,username
+GET /users?age__gte=18&status__in=active,pending&search=rahul&ordering=-created_at
 ```
 
-The library turns those parameters into Sequelize `where` / `order` options; Sequelize generates the SQL.
-It is plain JavaScript with TypeScript types, usable from ESM (`import`) and CommonJS (`require`), framework-agnostic, and deliberately specific: **Sequelize 6 + PostgreSQL only**.
+That reads like a sentence: _users aged 18 or more, whose status is active or pending, matching "rahul",
+newest first._ The library turns it into Sequelize `where` and `order` options, and Sequelize writes the SQL.
 
-> **New to this package, or an AI agent working in a project that uses it?** Read
-> [AGENTS.md](AGENTS.md) — one self-contained guide to everything: setup, every option, filter types,
-> lookups, search syntax, callback rules, errors, and every difference from DRF. After installing, it is at
-> `node_modules/drf-sequelize-filter/AGENTS.md`.
+![Node.js ≥ 18](https://img.shields.io/badge/node-%E2%89%A518-339933?logo=node.js&logoColor=white)
+![TypeScript types included](https://img.shields.io/badge/types-included-3178C6?logo=typescript&logoColor=white)
+![ESM and CommonJS](https://img.shields.io/badge/module-ESM%20%2B%20CommonJS-informational)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 
-**Compatibility is measured, not claimed.** A suite of 283 query strings runs against a real DRF +
-django-filter view and against this library, over the same database, and compares the rows returned:
-**275 identical, 8 documented differences, 0 failures** — see the [compatibility matrix](docs/COMPATIBILITY_MATRIX.md).
+---
+
+## The problem
+
+Every list endpoint ends up needing filters: by age, by status, by date, by name, by a related table. In
+Node there is no standard way to do it, so we write them by hand, endpoint after endpoint:
+
+```js
+// Without this library: one endpoint, three filters.
+app.get('/users', async (req, res) => {
+  const conditions = [];
+  if (req.query.min_age !== undefined) {
+    const age = Number(req.query.min_age);
+    if (Number.isNaN(age)) return res.status(400).json({ error: 'min_age must be a number' });
+    conditions.push({ age: { [Op.gte]: age } });
+  }
+  if (req.query.status) {
+    const statuses = String(req.query.status).split(',');
+    if (!statuses.every((s) => ['active', 'pending'].includes(s))) {
+      return res.status(400).json({ error: 'invalid status' });
+    }
+    conditions.push({ status: { [Op.in]: statuses } });
+  }
+  if (req.query.name) {
+    const escaped = String(req.query.name).replace(/[\\%_]/g, '\\$&'); // easy to forget
+    conditions.push({ username: { [Op.iLike]: `%${escaped}%` } });
+  }
+  // ...then sorting, search, date ranges, related tables, and the same again for the next endpoint.
+  res.json(await User.findAll({ where: { [Op.and]: conditions }, order: [['created_at', 'DESC']] }));
+});
+```
+
+It's repetitive, every endpoint ends up with slightly different parameter names, and each one is a place
+to forget a check.
+
+## The solution
+
+Install the library and describe your filters once:
+
+```js
+import { createFiltering, defineFilterSet } from 'drf-sequelize-filter';
+
+const userFiltering = createFiltering({
+  model: User,
+  filterSet: defineFilterSet({
+    age: { lookups: ['exact', 'gte', 'lte', 'range'] },
+    status: { type: 'choice', choices: ['active', 'pending'], lookups: ['exact', 'in'] },
+    username: { lookups: ['icontains', 'istartswith'] },
+    created_at: { lookups: ['gte', 'lte', 'year'] },
+  }),
+  searchFields: ['username', 'email'],
+  orderingFields: ['username', 'created_at', 'age'],
+});
+
+app.get('/users', async (req, res) => {
+  res.json(await User.findAll(userFiltering.apply({ query: req.query })));
+});
+```
+
+That endpoint now supports 11 filters, search and sorting. Every value is checked (`?age__gte=abc` gets a
+clear 400, see [Quick start](#quick-start) for the error handler), and the names work the same way on
+every endpoint you build.
+
+---
+
+## Why developers like it
+
+- **Filters you can read.** `age__gte=18` is "age greater than or equal to 18". `name__icontains=rahul` is
+  "name contains rahul, any case". Your frontend team and API users can learn it in a minute (see the
+  [cheat sheet](#cheat-sheet)).
+- **Lots of filters, ready to use.** 18 lookups (`exact`, `icontains`, `gte`, `in`, `range`, `isnull`,
+  `regex`, full-text `search`, …), 13 date and time parts like `year`, `month` and `week_day`, and filter
+  types for numbers, dates, times, UUIDs, enums, ranges and related records.
+- **Validation built in.** Wrong values become a clear JSON 400 error that names the field, before anything
+  reaches your database.
+- **Filter through relationships.** `?company__name__icontains=acme` follows your Sequelize associations.
+  No extra joins are added to your query, so rows are never duplicated and pagination counts stay right.
+- **Search and sorting included.** `?search=rahul kumar` and `?ordering=-created_at,username`, limited to
+  the fields you allow.
+- **Safe by default.** Only fields you list can be filtered, searched or sorted. Values are always escaped,
+  and there are limits against abusive queries.
+- **TypeScript support.** Types are included, and your editor catches typos like `serachFields` or an
+  unknown lookup before you run anything.
+- **Works with any framework:** Express, Fastify, Koa, NestJS or plain `http`, from `import` or `require`.
+- **Thoroughly tested.** Unit, security and PostgreSQL integration tests, plus 283 queries compared against
+  the original Python implementation it is modelled on (below).
+
+---
+
+## Cheat sheet
+
+| Your URL                            | Means                                                        |
+| ----------------------------------- | ------------------------------------------------------------ |
+| `?age=18`                           | age is exactly 18                                            |
+| `?age__gte=18` / `?age__lt=65`      | age ≥ 18 / age < 65                                          |
+| `?age__range=18,30`                 | age between 18 and 30 (inclusive)                            |
+| `?status__in=active,pending`        | status is active or pending                                  |
+| `?username__icontains=rah`          | username contains "rah", ignoring case                       |
+| `?username__istartswith=ra`         | username starts with "ra", ignoring case                     |
+| `?email__isnull=true`               | email is empty (NULL)                                        |
+| `?created_at__year=2024`            | created in 2024                                              |
+| `?created_at__date__gte=2024-01-01` | created on or after 1 January 2024                           |
+| `?company__name__icontains=acme`    | the related company's name contains "acme"                   |
+| `?search=rahul kumar`               | any search field contains "rahul kumar"                      |
+| `?search=rahul,delhi`               | matches "rahul" **and** matches "delhi" (commas split terms) |
+| `?ordering=-created_at,username`    | newest first, then by username                               |
+
+The pattern is always `field__lookup=value`. Only the filters you declare are available.
+
+---
+
+## Coming from Python and Django?
+
+Then you already know this library. It follows Django REST Framework and django-filter: the same URL
+syntax, the same lookup names, and the same idea of declaring a FilterSet. Moving an API from Django to
+Node, or working in both, means no new syntax to learn:
+
+| Django REST Framework / django-filter               | drf-sequelize-filter                                |
+| --------------------------------------------------- | --------------------------------------------------- |
+| `class UserFilter(FilterSet)`                       | `defineFilterSet({ ... })`                          |
+| `filterset_fields = ['status']`                     | `filterFields: ['status']`                          |
+| `search_fields`, `ordering_fields`, `ordering`      | `searchFields`, `orderingFields`, `defaultOrdering` |
+| `filter_backends`                                   | `backends`                                          |
+| `NumberFilter(field_name='age', lookup_expr='gte')` | `{ field: 'age', lookup: 'gte' }`                   |
+
+**Compatibility is measured, not claimed.** 283 query strings run against a real DRF + django-filter
+project and against this library, on the same database: **275 identical, 8 documented differences, 0
+failures** ([compatibility matrix](docs/COMPATIBILITY_MATRIX.md)). The
+[migration guide](docs/DRF_MIGRATION_GUIDE.md) has side-by-side examples.
+
+You don't need to know Python or Django to use this library, though. Everything in this README is plain
+Node.js.
 
 ---
 
 ## Contents
 
-[Install](#install) · [Quick start](#quick-start) · [FilterSet](#filterset) · [Filter types](#filter-types) ·
-[Lookups](#lookups) · [Relationships](#relationships) · [Search](#searchfilter) · [Ordering](#orderingfilter) ·
-[Custom filters & backends](#custom-filters-and-backends) · [Errors](#validation-and-errors) ·
-[Time zones](#time-zones) · [Pagination](#pagination) · [Security](#security) · [Differences from DRF](#differences-from-drf) ·
-[Docs](#documentation)
+[Install](#install) · [Quick start](#quick-start) · [Declaring filters](#declaring-filters) ·
+[Filter types](#filter-types) · [Lookups](#lookups) · [Relationships](#relationships) · [Search](#search) ·
+[Ordering](#ordering) · [Custom filters & backends](#custom-filters-and-backends) ·
+[Errors](#validation-and-errors) · [Time zones](#time-zones) · [Pagination](#pagination) ·
+[Security](#security) · [Differences from DRF](#differences-from-drf) · [Docs](#documentation)
+
+> **Using an AI coding assistant, or want everything in one place?** [AGENTS.md](AGENTS.md) is a single,
+> complete guide to every option, filter type, lookup, rule and error. After installing, it is at
+> `node_modules/drf-sequelize-filter/AGENTS.md`.
 
 ---
 
@@ -44,11 +171,11 @@ django-filter view and against this library, over the same database, and compare
 npm install drf-sequelize-filter sequelize pg pg-hstore
 ```
 
-- Node.js ≥ 18, ESM (`import`) or CommonJS (`require`)
-- TypeScript types included (no `@types` package needed). For a configuration kept in a variable, use
-  `satisfies FilterSetConfig` / `satisfies CreateFilteringOptions` so lookup names keep their literal types
-- Peer dependency: `sequelize` `^6.37`
-- PostgreSQL (full-text search needs nothing extra; it uses the database's default text-search config)
+- Node.js 18 or newer, with `import` (ESM) or `require` (CommonJS)
+- Sequelize 6 (`^6.37`) and PostgreSQL. Other databases are not supported.
+- TypeScript types included, no `@types` package needed. If you keep a configuration in a variable, add
+  `satisfies FilterSetConfig` (or `satisfies CreateFilteringOptions`) so TypeScript keeps lookup names
+  like `'gte'` exact
 
 ---
 
@@ -57,7 +184,7 @@ npm install drf-sequelize-filter sequelize pg pg-hstore
 ```js
 import { createFiltering, defineFilterSet, FilteringError } from 'drf-sequelize-filter';
 
-// DRF: class UserFilter(FilterSet)
+// 1. Describe the filters once, when your app starts.
 const UserFilterSet = defineFilterSet({
   age: { lookups: ['exact', 'gte', 'lte', 'range', 'in'] }, // ?age=  ?age__gte=  ?age__range=18,30
   username: { lookups: ['exact', 'icontains'] },
@@ -66,51 +193,56 @@ const UserFilterSet = defineFilterSet({
   created_at: { lookups: ['gte', 'lt', 'date', 'year'] },
 });
 
-// DRF: filter_backends + filterset_class + search_fields + ordering_fields + ordering
 const userFiltering = createFiltering({
-  model: User, // validates the whole configuration at startup
+  model: User, // checks the whole configuration at startup
   filterSet: UserFilterSet,
   searchFields: ['username', 'email', 'company__name'],
   orderingFields: ['username', 'created_at', 'age'],
   defaultOrdering: ['-created_at', 'id'],
 });
 
-// Any framework: pass the parsed query (object, URLSearchParams or string).
+// 2. Apply it in each request. Works with any framework: pass the query object, URLSearchParams or a string.
 app.get('/users', async (req, res, next) => {
   try {
     const options = userFiltering.apply({ query: req.query, request: req });
     const { rows, count } = await User.findAndCountAll({ ...options, limit: 20, offset: 0 });
     res.json({ count, results: rows });
   } catch (err) {
+    // Bad input from the client: a 400 with a helpful message.
     if (err instanceof FilteringError) return res.status(err.status).json({ error: err.toJSON() });
-    next(err); // ConfigurationError and anything else: a server error
+    next(err); // anything else, including ConfigurationError, is a server error
   }
 });
 ```
 
-The default backends are `[DjangoFilterBackend, SearchFilter, OrderingFilter]`, as in a typical DRF view.
+By default the filters run first, then search, then ordering. You can add your own steps, for example to
+limit every query to the current tenant (see [backends](#custom-filters-and-backends)).
 
 ---
 
-## FilterSet
+# Reference
 
-`defineFilterSet` mirrors django-filter's two ways of declaring filters, including how params are named.
+## Declaring filters
 
-**Generated filters** — like `Meta.fields = {'age': ['exact', 'gte']}`: one param per lookup.
-`exact` uses the bare name; there is no `age__exact` (django-filter never generates it).
+`defineFilterSet` has two ways to declare a filter. They differ in how the URL parameters are named.
+(Django users: these are django-filter's `Meta.fields` and declared filters, with the same naming.)
+
+**A list of lookups** (`lookups: [...]`) gives one parameter per lookup. `exact` uses the bare name, and
+every other lookup is `name__lookup`. There is no `age__exact`.
 
 ```js
 defineFilterSet({ age: { lookups: ['exact', 'gte'] } }); // ?age=  ?age__gte=
 ```
 
-**Declared filters** — like `min_age = NumberFilter(field_name='age', lookup_expr='gte')`: one param, the key.
+**A single lookup** (`lookup: '...'`) gives exactly one parameter, named after the key. Use it for a
+friendly name like `min_age` (django-filter: `NumberFilter(field_name='age', lookup_expr='gte')`).
 
 ```js
 defineFilterSet({ min_age: { field: 'age', lookup: 'gte' } }); // ?min_age=   (and not ?min_age__gte=)
 ```
 
-**`filterFields`** — the `filterset_fields` shorthand. Types are inferred from the model, exactly as
-django-filter infers them from Django fields, so `?age__gte=hello` is a 400 and never reaches the database.
+**`filterFields`** is a shortcut when you just want some fields filterable (DRF's `filterset_fields`).
+Types come from your Sequelize model, so `?age__gte=hello` is a 400 and never reaches the database.
 
 ```js
 createFiltering({ model: Product, filterFields: ['category', 'in_stock'] });
@@ -224,7 +356,7 @@ rejected at startup.
 
 ---
 
-## SearchFilter
+## Search
 
 ```js
 createFiltering({ model: User, searchFields: ['username', '^email', '=code', '$slug', '@bio', 'company__name'] });
@@ -270,7 +402,7 @@ For DRF's splitting, override `getSearchTerms` in a `SearchFilter` subclass and 
 
 ---
 
-## OrderingFilter
+## Ordering
 
 ```js
 createFiltering({
@@ -431,7 +563,7 @@ The complete list, with the reasoning for each, is in [docs/BEHAVIORAL_SPEC.md](
 | [Configuration](docs/CONFIGURATION.md)               | `createFiltering` options and defaults           |
 | [Lookup matrix](docs/LOOKUP_MATRIX.md)               | Every lookup: Django semantics, SQL, support     |
 | [Behavioral spec](docs/BEHAVIORAL_SPEC.md)           | Feature-by-feature DRF behavior and ours         |
-| [Compatibility matrix](docs/COMPATIBILITY_MATRIX.md) | Generated results of the 274-case DRF comparison |
+| [Compatibility matrix](docs/COMPATIBILITY_MATRIX.md) | Generated results of the 283-case DRF comparison |
 | [Security](docs/SECURITY.md)                         | Threat model and protections                     |
 | [Architecture](docs/ARCHITECTURE.md)                 | How it works inside                              |
 
