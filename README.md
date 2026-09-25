@@ -1,4 +1,4 @@
-# drf-sequelize-filter
+# node-query-filter
 
 **Ready-made filtering, search and sorting for Node.js APIs built on Sequelize + PostgreSQL.**
 Stop hand-writing `if (req.query.something)` for every field. Say which fields can be filtered, and your
@@ -56,7 +56,7 @@ to forget a check.
 Install the library and describe your filters once:
 
 ```js
-import { createFiltering, defineFilterSet } from 'drf-sequelize-filter';
+import { createFiltering, defineFilterSet } from 'node-query-filter';
 
 const userFiltering = createFiltering({
   model: User,
@@ -133,7 +133,7 @@ Then you already know this library. It follows Django REST Framework and django-
 syntax, the same lookup names, and the same idea of declaring a FilterSet. Moving an API from Django to
 Node, or working in both, means no new syntax to learn:
 
-| Django REST Framework / django-filter               | drf-sequelize-filter                                |
+| Django REST Framework / django-filter               | node-query-filter                                   |
 | --------------------------------------------------- | --------------------------------------------------- |
 | `class UserFilter(FilterSet)`                       | `defineFilterSet({ ... })`                          |
 | `filterset_fields = ['status']`                     | `filterFields: ['status']`                          |
@@ -161,14 +161,14 @@ Node.js.
 
 > **Using an AI coding assistant, or want everything in one place?** [AGENTS.md](AGENTS.md) is a single,
 > complete guide to every option, filter type, lookup, rule and error. After installing, it is at
-> `node_modules/drf-sequelize-filter/AGENTS.md`.
+> `node_modules/node-query-filter/AGENTS.md`.
 
 ---
 
 ## Install
 
 ```bash
-npm install drf-sequelize-filter sequelize pg pg-hstore
+npm install node-query-filter sequelize pg pg-hstore
 ```
 
 - Node.js 18 or newer, with `import` (ESM) or `require` (CommonJS)
@@ -182,7 +182,7 @@ npm install drf-sequelize-filter sequelize pg pg-hstore
 ## Quick start
 
 ```js
-import { createFiltering, defineFilterSet, FilteringError } from 'drf-sequelize-filter';
+import { createFiltering, defineFilterSet, FilteringError } from 'node-query-filter';
 
 // 1. Describe the filters once, when your app starts.
 const UserFilterSet = defineFilterSet({
@@ -452,7 +452,7 @@ ignored one would return every row.
 A backend is DRF's `BaseFilterBackend`: a class with `apply(context)`, an instance, or a plain function.
 
 ```js
-import { BaseFilterBackend, andWhere } from 'drf-sequelize-filter';
+import { BaseFilterBackend, andWhere } from 'node-query-filter';
 
 class TenantFilterBackend extends BaseFilterBackend {
   apply(context) {

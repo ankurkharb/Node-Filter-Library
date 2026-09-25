@@ -1,6 +1,6 @@
 // The CommonJS entry resolves to the same types.
 
-import lib = require('drf-sequelize-filter');
+import lib = require('node-query-filter');
 
 const filtering: lib.Filtering = lib.createFiltering({
   filterSet: lib.defineFilterSet({ age: ['gte'] }),

@@ -1,6 +1,6 @@
 # API Reference
 
-Everything is exported from the package root: `import { ... } from 'drf-sequelize-filter'`.
+Everything is exported from the package root: `import { ... } from 'node-query-filter'`.
 
 ## Core
 

@@ -1,6 +1,6 @@
 /**
  * Build the CommonJS entry (dist/index.cjs) from the ES module source, so
- * `require('drf-sequelize-filter')` works. The ESM source in src/ is
+ * `require('node-query-filter')` works. The ESM source in src/ is
  * published as-is and stays the primary entry.
  */
 

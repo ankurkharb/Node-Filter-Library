@@ -1,7 +1,7 @@
 {
-  "name": "drf-sequelize-filter",
+  "name": "node-query-filter",
   "version": "1.0.0",
-  "description": "Django REST Framework–style filtering, search, and ordering for Node.js + Sequelize + PostgreSQL",
+  "description": "Ready-made filtering, search and sorting for Node.js APIs using Sequelize + PostgreSQL: turn ?age__gte=18&search=rahul into validated queries. Django REST Framework–style syntax.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./src/index.js",
@@ -47,14 +47,23 @@
     "test:cjs": "npm run build && node --test test/cjs/*.test.cjs"
   },
   "keywords": [
-    "django",
-    "drf",
-    "filter",
     "sequelize",
     "postgresql",
-    "ordering",
+    "postgres",
+    "filter",
+    "filters",
+    "query",
+    "querystring",
     "search",
-    "typescript"
+    "ordering",
+    "sorting",
+    "api",
+    "rest",
+    "express",
+    "typescript",
+    "django",
+    "drf",
+    "django-filter"
   ],
   "license": "MIT",
   "peerDependencies": {

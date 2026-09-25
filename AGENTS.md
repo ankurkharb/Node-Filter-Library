@@ -1,4 +1,4 @@
-# drf-sequelize-filter — complete guide (for developers and AI agents)
+# node-query-filter — complete guide (for developers and AI agents)
 
 This single file is everything needed to use this package correctly. Read it once, top to bottom. The
 other files in `docs/` go deeper on single topics, but nothing here depends on them.
@@ -22,12 +22,12 @@ Express, Fastify, Koa, or plain `http`.
 ## 2. Install
 
 ```bash
-npm install drf-sequelize-filter          # or: npm install github:ankurkharb/Node-Filter-Library
+npm install node-query-filter          # or: npm install github:ankurkharb/Node-Filter-Library
 npm install sequelize pg pg-hstore        # the app provides these
 ```
 
 In TypeScript or CommonJS the API is identical:
-`const { createFiltering, defineFilterSet, FilteringError } = require('drf-sequelize-filter');`.
+`const { createFiltering, defineFilterSet, FilteringError } = require('node-query-filter');`.
 Types such as `FilterContext`, `QueryState`, `FilterDefinition` and `CreateFilteringOptions` are exported.
 TypeScript rejects most configuration mistakes before the code runs (unknown options and lookups,
 `lookup` with `lookups`, async or value-returning methods). A configuration kept in a variable needs
@@ -39,7 +39,7 @@ Use one module system per app: the ESM and CommonJS builds each have their own e
 
 ```js
 import { Op } from 'sequelize';
-import { createFiltering, defineFilterSet, FilteringError } from 'drf-sequelize-filter';
+import { createFiltering, defineFilterSet, FilteringError } from 'node-query-filter';
 
 // 1. Once, at startup (module level) — like a DRF view's filter configuration.
 const userFiltering = createFiltering({
@@ -331,7 +331,7 @@ a `SecurityLimitError`.
 **This differs from DRF**, where `?search=rahul kumar` is two terms. To get DRF's splitting, override:
 
 ```js
-import { SearchFilter, searchSmartSplit, normalizeQuery, lastValue } from 'drf-sequelize-filter';
+import { SearchFilter, searchSmartSplit, normalizeQuery, lastValue } from 'node-query-filter';
 class DrfSearchFilter extends SearchFilter {
   getSearchTerms(context) {
     return searchSmartSplit(lastValue(normalizeQuery(context.query).search) ?? '');
@@ -412,7 +412,7 @@ Backends run in order and share one query state. A backend is a class with `appl
 of one, or a plain function `(context) => queryState | void`.
 
 ```js
-import { BaseFilterBackend, DjangoFilterBackend, SearchFilter, OrderingFilter, andWhere } from 'drf-sequelize-filter';
+import { BaseFilterBackend, DjangoFilterBackend, SearchFilter, OrderingFilter, andWhere } from 'node-query-filter';
 import { Op } from 'sequelize';
 
 class TenantFilterBackend extends BaseFilterBackend {

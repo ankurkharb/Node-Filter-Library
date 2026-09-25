@@ -1,22 +1,5 @@
 # Changelog
 
-## Unreleased
-
-- **TypeScript types** for the whole public API (`types/index.d.ts`), with typed filter definitions,
-  lookup names, options, backends, errors and helpers.
-- **CommonJS build**: `require('drf-sequelize-filter')` works (`dist/index.cjs`, built by `npm run build`
-  and automatically on `npm pack`, `npm publish` and installs from git). `import` still loads the ESM source.
-- New scripts: `build`, `test:cjs`, `test:types`.
-- Types reject either-or pairs that throw `ConfigurationError` at runtime: `lookup` with `lookups`,
-  `filterSet` with `filterFields`, `defaultOrdering` with `ordering`.
-- `npm run test:types` also checks that every name list in the types matches the code, and that every
-  JavaScript example in the docs type-checks.
-
-### Fixed
-
-- An invalid `valueType` on a `range` filter (e.g. `'bigint'`) is now a `ConfigurationError` when the
-  filter set is defined. Before, it was accepted and every request then failed with a `TypeError`.
-
 ## 1.0.0
 
 Initial release: Django REST Framework / django-filter-style filtering, search and ordering for
@@ -46,5 +29,9 @@ Node.js + Sequelize 6 + PostgreSQL.
   raised at startup when the model is given.
 - **Security:** allowlisted filters, lookups, search and ordering fields; limits on `IN` values, filters,
   search terms and relationship depth; regular-expression checks.
+- **TypeScript types** for the whole public API (`types/index.d.ts`): typed filter definitions, lookup
+  names, options, backends, errors and helpers, so typos and invalid options are caught in the editor.
+- **ESM and CommonJS:** `import` loads the ES module source; `require` loads a CommonJS build
+  (`dist/index.cjs`, built automatically on `npm pack`, `npm publish` and installs from git).
 - **DRF compatibility suite:** 283 query strings compared against a real DRF + django-filter view
   (`npm run test:compat`); results in `docs/COMPATIBILITY_MATRIX.md`.

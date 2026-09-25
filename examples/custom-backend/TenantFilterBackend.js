@@ -5,7 +5,7 @@
  */
 
 import { Op } from 'sequelize';
-import { BaseFilterBackend, andWhere } from 'drf-sequelize-filter';
+import { BaseFilterBackend, andWhere } from 'node-query-filter';
 
 export class TenantFilterBackend extends BaseFilterBackend {
   apply(context) {

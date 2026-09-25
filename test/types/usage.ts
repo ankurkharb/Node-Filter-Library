@@ -23,7 +23,7 @@ import {
   type FilterOptions,
   type FilterSetConfig,
   type QueryState,
-} from 'drf-sequelize-filter';
+} from 'node-query-filter';
 
 const sequelize = new Sequelize('postgres://localhost/db');
 const User = sequelize.define('User', { age: DataTypes.INTEGER, username: DataTypes.STRING });

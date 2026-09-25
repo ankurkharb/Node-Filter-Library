@@ -1,6 +1,6 @@
 # DRF → Node Filtering Migration Guide
 
-Side-by-side translations from Django REST Framework + django-filter to **drf-sequelize-filter**.
+Side-by-side translations from Django REST Framework + django-filter to **node-query-filter**.
 Your clients' query strings do not change.
 
 ## Mental model

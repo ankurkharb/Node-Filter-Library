@@ -1,5 +1,5 @@
 {
-  "name": "drf-sequelize-filter-example",
+  "name": "node-query-filter-example",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "dotenv": "^16.4.7",
-    "drf-sequelize-filter": "file:../..",
+    "node-query-filter": "file:../..",
     "express": "^4.21.2",
     "pg": "^8.13.1",
     "pg-hstore": "^2.3.4",

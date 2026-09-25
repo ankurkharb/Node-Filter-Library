@@ -14,7 +14,7 @@ import {
   SearchFilter,
   OrderingFilter,
   FilteringError,
-} from 'drf-sequelize-filter';
+} from 'node-query-filter';
 import { sequelize, User, Company, Product } from './models/index.js';
 import { TenantFilterBackend } from '../custom-backend/TenantFilterBackend.js';
 

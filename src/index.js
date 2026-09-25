@@ -1,5 +1,5 @@
 /**
- * drf-sequelize-filter — public API
+ * node-query-filter — public API
  */
 
 export {

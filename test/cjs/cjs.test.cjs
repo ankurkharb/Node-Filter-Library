@@ -6,7 +6,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { Sequelize, DataTypes, Op } = require('sequelize');
 
-const cjs = require('drf-sequelize-filter');
+const cjs = require('node-query-filter');
 
 function offlineUser() {
   const sequelize = new Sequelize('postgres://user:pass@127.0.0.1:1/offline', { logging: false });
@@ -47,16 +47,16 @@ function config(lib, model) {
 }
 
 test('require() resolves to the CommonJS build', () => {
-  assert.equal(require.resolve('drf-sequelize-filter').endsWith('dist/index.cjs'), true);
+  assert.equal(require.resolve('node-query-filter').endsWith('dist/index.cjs'), true);
 });
 
 test('exports the same names as the ES module', async () => {
-  const esm = await import('drf-sequelize-filter');
+  const esm = await import('node-query-filter');
   assert.deepEqual(Object.keys(cjs).sort(), Object.keys(esm).sort());
 });
 
 test('produces the same SQL as the ES module', async () => {
-  const esm = await import('drf-sequelize-filter');
+  const esm = await import('node-query-filter');
   const User = offlineUser();
   const query =
     '?age__gte=18&age__in=20,30&status=active&created_at__year=2024&company__name__icontains=ac&search=ra&ordering=company__name';

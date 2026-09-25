@@ -12,7 +12,7 @@
 import { DEFAULT_LOOKUP, parseLookup } from '../lookups/index.js';
 import { ConfigurationError } from '../errors/index.js';
 
-const FILTER_SET = Symbol('drf-sequelize-filter.FilterSet');
+const FILTER_SET = Symbol('node-query-filter.FilterSet');
 
 export const FIELD_TYPES = new Set([
   'auto',

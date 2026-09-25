@@ -1,5 +1,5 @@
 /**
- * Type definitions for drf-sequelize-filter.
+ * Type definitions for node-query-filter.
  *
  * Hand-written to match src/. `test/types/` type-checks these against real
  * usage; keep both in sync when the public API changes.
