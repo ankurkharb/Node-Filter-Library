@@ -11,10 +11,15 @@ GET /users?age__gte=18&status__in=active,pending&search=rahul&ordering=-created_
 That reads like a sentence: _users aged 18 or more, whose status is active or pending, matching "rahul",
 newest first._ The library turns it into Sequelize `where` and `order` options, and Sequelize writes the SQL.
 
+[![npm version](https://img.shields.io/npm/v/node-query-filter?logo=npm&color=CB3837)](https://www.npmjs.com/package/node-query-filter)
+[![npm downloads](https://img.shields.io/npm/dm/node-query-filter?color=CB3837)](https://www.npmjs.com/package/node-query-filter)
 ![Node.js ≥ 18](https://img.shields.io/badge/node-%E2%89%A518-339933?logo=node.js&logoColor=white)
 ![TypeScript types included](https://img.shields.io/badge/types-included-3178C6?logo=typescript&logoColor=white)
 ![ESM and CommonJS](https://img.shields.io/badge/module-ESM%20%2B%20CommonJS-informational)
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue)
+
+**📦 Available on npm:** [node-query-filter](https://www.npmjs.com/package/node-query-filter). Install it
+with `npm install node-query-filter`.
 
 ---
 
@@ -166,6 +171,9 @@ Node.js.
 ---
 
 ## Install
+
+The package is on npm at [npmjs.com/package/node-query-filter](https://www.npmjs.com/package/node-query-filter).
+Install it together with Sequelize and the PostgreSQL driver:
 
 ```bash
 npm install node-query-filter sequelize pg pg-hstore
