@@ -1,0 +1,7 @@
+node_modules/
+compatibility/drf-reference/
+compatibility/cases.json
+docs/COMPATIBILITY_MATRIX.md
+package-lock.json
+dist/
+test/types/generated/

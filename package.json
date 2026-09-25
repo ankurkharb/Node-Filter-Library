@@ -1,0 +1,83 @@
+{
+  "name": "drf-sequelize-filter",
+  "version": "1.0.0",
+  "description": "Django REST Framework–style filtering, search, and ordering for Node.js + Sequelize + PostgreSQL",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./src/index.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./types/index.d.ts",
+        "default": "./src/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "dist",
+    "types",
+    "docs",
+    "AGENTS.md",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node scripts/build-cjs.js",
+    "prepare": "npm run build",
+    "test": "node --test test/unit/*.test.js test/security/*.test.js test/integration/*.test.js",
+    "test:unit": "node --test test/unit/*.test.js",
+    "test:security": "node --test test/security/*.test.js",
+    "test:integration": "node --test test/integration/*.test.js",
+    "test:compat": "node compatibility/run.js",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:types": "npm run build && node test/types/generate.js && tsc -p test/types && tsc -p test/types/tsconfig.docs.json && node --test test/types/*.test.js",
+    "test:cjs": "npm run build && node --test test/cjs/*.test.cjs"
+  },
+  "keywords": [
+    "django",
+    "drf",
+    "filter",
+    "sequelize",
+    "postgresql",
+    "ordering",
+    "search",
+    "typescript"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "sequelize": "^6.37.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.2",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0",
+    "pg": "^8.13.1",
+    "pg-hstore": "^2.3.4",
+    "prettier": "^3.9.8",
+    "sequelize": "^6.37.8",
+    "typescript": "^7.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankurkharb/Node-Filter-Library.git"
+  },
+  "homepage": "https://github.com/ankurkharb/Node-Filter-Library#readme",
+  "bugs": {
+    "url": "https://github.com/ankurkharb/Node-Filter-Library/issues"
+  }
+}

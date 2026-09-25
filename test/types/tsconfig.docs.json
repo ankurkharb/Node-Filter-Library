@@ -1,0 +1,7 @@
+{
+  // The doc examples are plain JavaScript, so parameters without annotations are allowed.
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "noImplicitAny": false },
+  "files": [],
+  "include": ["generated/docs/*.ts"]
+}

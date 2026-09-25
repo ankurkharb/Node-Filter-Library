@@ -1,0 +1,5 @@
+# Versions the compatibility suite was last verified against.
+Django==6.1.1
+djangorestframework==3.18.1
+django-filter==26.1
+psycopg[binary]>=3.2

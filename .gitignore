@@ -1,0 +1,14 @@
+node_modules/
+coverage/
+.env
+*.log
+.DS_Store
+examples/basic-node-sequelize/node_modules/
+compatibility/drf-reference/.venv/
+dist/
+.idea/
+.vscode/
+compatibility/drf-reference/__pycache__/
+compatibility/drf-reference/refapp/__pycache__/
+node_modules/.dsf-sequelize-copy/
+test/types/generated/

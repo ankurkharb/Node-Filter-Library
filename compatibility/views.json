@@ -1,0 +1,19 @@
+{
+  "users": {
+    "search_fields": ["username", "email", "company__name"],
+    "ordering_fields": ["username", "created_at", "age", "score", "company__name", "company__country", "id"]
+  },
+  "users_default_ordering": { "search_fields": [], "ordering_fields": ["age"], "ordering": ["-id"] },
+  "search_istartswith": { "search_fields": ["^username"], "ordering_fields": [] },
+  "search_iexact": { "search_fields": ["=username"], "ordering_fields": [] },
+  "search_iregex": { "search_fields": ["$username"], "ordering_fields": [] },
+  "search_fts": { "search_fields": ["@username", "@company__name"], "ordering_fields": [] },
+  "search_int": { "search_fields": ["age"], "ordering_fields": [] },
+  "search_int_exact": { "search_fields": ["=age"], "ordering_fields": [] },
+  "search_explicit_lookup": {
+    "search_fields": ["username__iexact", "company__name__istartswith"],
+    "ordering_fields": []
+  },
+  "search_orders": { "search_fields": ["orders__code"], "ordering_fields": [] },
+  "ordering_all": { "search_fields": [], "ordering_fields": "__all__" }
+}

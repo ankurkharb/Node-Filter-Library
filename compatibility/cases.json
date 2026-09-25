@@ -1,0 +1,1747 @@
+[
+ {
+  "id": "text-01",
+  "category": "text",
+  "view": "users",
+  "query": "?username=john"
+ },
+ {
+  "id": "text-02",
+  "category": "text",
+  "view": "users",
+  "query": "?username="
+ },
+ {
+  "id": "text-03",
+  "category": "text",
+  "view": "users",
+  "query": "?username=%20%20john%20%20"
+ },
+ {
+  "id": "text-04",
+  "category": "text",
+  "view": "users",
+  "query": "?username=%20%20"
+ },
+ {
+  "id": "text-05",
+  "category": "text",
+  "view": "users",
+  "query": "?username=JOHN"
+ },
+ {
+  "id": "text-06",
+  "category": "text",
+  "view": "users",
+  "query": "?username=null"
+ },
+ {
+  "id": "text-07",
+  "category": "text",
+  "view": "users",
+  "query": "?username__exact=john"
+ },
+ {
+  "id": "text-08",
+  "category": "text",
+  "view": "users",
+  "query": "?username__iexact=JOHN"
+ },
+ {
+  "id": "text-09",
+  "category": "text",
+  "view": "users",
+  "query": "?username__iexact=zoË"
+ },
+ {
+  "id": "text-10",
+  "category": "text",
+  "view": "users",
+  "query": "?username__contains=oh"
+ },
+ {
+  "id": "text-11",
+  "category": "text",
+  "view": "users",
+  "query": "?username__contains=OH"
+ },
+ {
+  "id": "text-12",
+  "category": "text",
+  "view": "users",
+  "query": "?username__icontains=JOHN"
+ },
+ {
+  "id": "text-13",
+  "category": "text",
+  "view": "users",
+  "query": "?username__icontains=%25"
+ },
+ {
+  "id": "text-14",
+  "category": "text",
+  "view": "users",
+  "query": "?username__icontains=_"
+ },
+ {
+  "id": "text-15",
+  "category": "text",
+  "view": "users",
+  "query": "?username__icontains=%5C"
+ },
+ {
+  "id": "text-16",
+  "category": "text",
+  "view": "users",
+  "query": "?username__icontains=zo%C3%AB"
+ },
+ {
+  "id": "text-17",
+  "category": "text",
+  "view": "users",
+  "query": "?username__icontains=o'b"
+ },
+ {
+  "id": "text-18",
+  "category": "text",
+  "view": "users",
+  "query": "?username__icontains=%27%3B%20DROP%20TABLE%20users%3B--"
+ },
+ {
+  "id": "text-19",
+  "category": "text",
+  "view": "users",
+  "query": "?username__startswith=jo"
+ },
+ {
+  "id": "text-20",
+  "category": "text",
+  "view": "users",
+  "query": "?username__istartswith=JO"
+ },
+ {
+  "id": "text-21",
+  "category": "text",
+  "view": "users",
+  "query": "?username__endswith=hn"
+ },
+ {
+  "id": "text-22",
+  "category": "text",
+  "view": "users",
+  "query": "?username__iendswith=HN"
+ },
+ {
+  "id": "text-23",
+  "category": "text",
+  "view": "users",
+  "query": "?username__isnull=true"
+ },
+ {
+  "id": "text-24",
+  "category": "text",
+  "view": "users",
+  "query": "?username__isnull=false"
+ },
+ {
+  "id": "regex-01",
+  "category": "regex",
+  "view": "users",
+  "query": "?username__regex=^jo"
+ },
+ {
+  "id": "regex-02",
+  "category": "regex",
+  "view": "users",
+  "query": "?username__iregex=^JO"
+ },
+ {
+  "id": "regex-03",
+  "category": "regex",
+  "view": "users",
+  "query": "?username__regex=(a%2B)%2B%24"
+ },
+ {
+  "id": "regex-04",
+  "category": "regex",
+  "view": "users",
+  "query": "?username__regex=^(j|J)o"
+ },
+ {
+  "id": "regex-05",
+  "category": "regex",
+  "view": "users",
+  "query": "?username__iregex=%5Bz%5Do"
+ },
+ {
+  "id": "regex-06",
+  "category": "regex",
+  "view": "users",
+  "query": "?username__regex=(",
+  "expect": "node-rejects",
+  "note": "DRF passes an invalid pattern to PostgreSQL (500); the library returns 400"
+ },
+ {
+  "id": "regex-07",
+  "category": "regex",
+  "view": "users",
+  "query": "?username__regex=(a%7B1,255%7D)%7B1,255%7D",
+  "expect": "node-rejects",
+  "note": "PostgreSQL: \"regular expression is too complex\" (500 in DRF); the library returns 400"
+ },
+ {
+  "id": "number-01",
+  "category": "number",
+  "view": "users",
+  "query": "?age=18"
+ },
+ {
+  "id": "number-02",
+  "category": "number",
+  "view": "users",
+  "query": "?age=0"
+ },
+ {
+  "id": "number-03",
+  "category": "number",
+  "view": "users",
+  "query": "?age=18.0"
+ },
+ {
+  "id": "number-04",
+  "category": "number",
+  "view": "users",
+  "query": "?age=%2B18"
+ },
+ {
+  "id": "number-05",
+  "category": "number",
+  "view": "users",
+  "query": "?age=18.7"
+ },
+ {
+  "id": "number-06",
+  "category": "number",
+  "view": "users",
+  "query": "?age=-0.5"
+ },
+ {
+  "id": "number-07",
+  "category": "number",
+  "view": "users",
+  "query": "?age=1e1"
+ },
+ {
+  "id": "number-08",
+  "category": "number",
+  "view": "users",
+  "query": "?age=%2018%20"
+ },
+ {
+  "id": "number-09",
+  "category": "number",
+  "view": "users",
+  "query": "?age=hello"
+ },
+ {
+  "id": "number-10",
+  "category": "number",
+  "view": "users",
+  "query": "?age="
+ },
+ {
+  "id": "number-11",
+  "category": "number",
+  "view": "users",
+  "query": "?age__gt=18"
+ },
+ {
+  "id": "number-12",
+  "category": "number",
+  "view": "users",
+  "query": "?age__gte=18"
+ },
+ {
+  "id": "number-13",
+  "category": "number",
+  "view": "users",
+  "query": "?age__lt=30"
+ },
+ {
+  "id": "number-14",
+  "category": "number",
+  "view": "users",
+  "query": "?age__lte=30"
+ },
+ {
+  "id": "number-15",
+  "category": "number",
+  "view": "users",
+  "query": "?age__lt=0"
+ },
+ {
+  "id": "number-16",
+  "category": "number",
+  "view": "users",
+  "query": "?age__gte=18&age__lte=30"
+ },
+ {
+  "id": "number-17",
+  "category": "number",
+  "view": "users",
+  "query": "?age__icontains=1"
+ },
+ {
+  "id": "number-18",
+  "category": "number",
+  "view": "users",
+  "query": "?age__icontains=x"
+ },
+ {
+  "id": "number-19",
+  "category": "number",
+  "view": "users",
+  "query": "?age__isnull=true"
+ },
+ {
+  "id": "number-20",
+  "category": "number",
+  "view": "users",
+  "query": "?score=2"
+ },
+ {
+  "id": "number-21",
+  "category": "number",
+  "view": "users",
+  "query": "?score__gte=1.5"
+ },
+ {
+  "id": "number-22",
+  "category": "number",
+  "view": "users",
+  "query": "?score__gte=1E0"
+ },
+ {
+  "id": "number-23",
+  "category": "number",
+  "view": "users",
+  "query": "?score=.5"
+ },
+ {
+  "id": "number-24",
+  "category": "number",
+  "view": "users",
+  "query": "?score=nan"
+ },
+ {
+  "id": "number-25",
+  "category": "number",
+  "view": "users",
+  "query": "?score=inf"
+ },
+ {
+  "id": "number-26",
+  "category": "number",
+  "view": "users",
+  "query": "?score__isnull=true"
+ },
+ {
+  "id": "in-range-01",
+  "category": "in-range",
+  "view": "users",
+  "query": "?age__in=18,25"
+ },
+ {
+  "id": "in-range-02",
+  "category": "in-range",
+  "view": "users",
+  "query": "?age__in=18,"
+ },
+ {
+  "id": "in-range-03",
+  "category": "in-range",
+  "view": "users",
+  "query": "?age__in=,"
+ },
+ {
+  "id": "in-range-04",
+  "category": "in-range",
+  "view": "users",
+  "query": "?age__in="
+ },
+ {
+  "id": "in-range-05",
+  "category": "in-range",
+  "view": "users",
+  "query": "?age__in=18,x"
+ },
+ {
+  "id": "in-range-06",
+  "category": "in-range",
+  "view": "users",
+  "query": "?age__in=18&age__in=25"
+ },
+ {
+  "id": "in-range-07",
+  "category": "in-range",
+  "view": "users",
+  "query": "?username__in=john,"
+ },
+ {
+  "id": "in-range-08",
+  "category": "in-range",
+  "view": "users",
+  "query": "?username__in=,"
+ },
+ {
+  "id": "in-range-09",
+  "category": "in-range",
+  "view": "users",
+  "query": "?username__in=john,John"
+ },
+ {
+  "id": "in-range-10",
+  "category": "in-range",
+  "view": "users",
+  "query": "?status__in=active,pending"
+ },
+ {
+  "id": "in-range-11",
+  "category": "in-range",
+  "view": "users",
+  "query": "?status__in=active,%20pending"
+ },
+ {
+  "id": "in-range-12",
+  "category": "in-range",
+  "view": "users",
+  "query": "?status__in=active,"
+ },
+ {
+  "id": "in-range-13",
+  "category": "in-range",
+  "view": "users",
+  "query": "?status__in=active,active"
+ },
+ {
+  "id": "in-range-14",
+  "category": "in-range",
+  "view": "users",
+  "query": "?status__in=active,bogus"
+ },
+ {
+  "id": "in-range-15",
+  "category": "in-range",
+  "view": "users",
+  "query": "?age__range=18,30"
+ },
+ {
+  "id": "in-range-16",
+  "category": "in-range",
+  "view": "users",
+  "query": "?age__range=18"
+ },
+ {
+  "id": "in-range-17",
+  "category": "in-range",
+  "view": "users",
+  "query": "?age__range=1,2,3"
+ },
+ {
+  "id": "in-range-18",
+  "category": "in-range",
+  "view": "users",
+  "query": "?age__range=18,"
+ },
+ {
+  "id": "in-range-19",
+  "category": "in-range",
+  "view": "users",
+  "query": "?age__range=30,18"
+ },
+ {
+  "id": "in-range-20",
+  "category": "in-range",
+  "view": "users",
+  "query": "?age__in=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119",
+  "expect": "node-rejects",
+  "note": "security.maxInValues (default 100); DRF has no limit"
+ },
+ {
+  "id": "boolean-01",
+  "category": "boolean",
+  "view": "users",
+  "query": "?deleted_at__isnull=true"
+ },
+ {
+  "id": "boolean-02",
+  "category": "boolean",
+  "view": "users",
+  "query": "?deleted_at__isnull=false"
+ },
+ {
+  "id": "boolean-03",
+  "category": "boolean",
+  "view": "users",
+  "query": "?deleted_at__isnull=True"
+ },
+ {
+  "id": "boolean-04",
+  "category": "boolean",
+  "view": "users",
+  "query": "?deleted_at__isnull=FALSE"
+ },
+ {
+  "id": "boolean-05",
+  "category": "boolean",
+  "view": "users",
+  "query": "?deleted_at__isnull=1"
+ },
+ {
+  "id": "boolean-06",
+  "category": "boolean",
+  "view": "users",
+  "query": "?deleted_at__isnull=0"
+ },
+ {
+  "id": "boolean-07",
+  "category": "boolean",
+  "view": "users",
+  "query": "?deleted_at__isnull=yes"
+ },
+ {
+  "id": "boolean-08",
+  "category": "boolean",
+  "view": "users",
+  "query": "?deleted_at__isnull=2"
+ },
+ {
+  "id": "boolean-09",
+  "category": "boolean",
+  "view": "users",
+  "query": "?deleted_at__isnull="
+ },
+ {
+  "id": "boolean-10",
+  "category": "boolean",
+  "view": "users",
+  "query": "?is_active=true"
+ },
+ {
+  "id": "boolean-11",
+  "category": "boolean",
+  "view": "users",
+  "query": "?is_active=false"
+ },
+ {
+  "id": "boolean-12",
+  "category": "boolean",
+  "view": "users",
+  "query": "?is_active=TRUE"
+ },
+ {
+  "id": "boolean-13",
+  "category": "boolean",
+  "view": "users",
+  "query": "?is_active=1"
+ },
+ {
+  "id": "boolean-14",
+  "category": "boolean",
+  "view": "users",
+  "query": "?is_active=maybe"
+ },
+ {
+  "id": "boolean-15",
+  "category": "boolean",
+  "view": "users",
+  "query": "?is_active__isnull=true"
+ },
+ {
+  "id": "boolean-16",
+  "category": "boolean",
+  "view": "users",
+  "query": "?email__isnull=true"
+ },
+ {
+  "id": "uuid-01",
+  "category": "uuid",
+  "view": "users",
+  "query": "?uid=11111111-1111-4111-8111-111111111111"
+ },
+ {
+  "id": "uuid-02",
+  "category": "uuid",
+  "view": "users",
+  "query": "?uid=11111111111141118111111111111111"
+ },
+ {
+  "id": "uuid-03",
+  "category": "uuid",
+  "view": "users",
+  "query": "?uid=%7B11111111-1111-4111-8111-111111111111%7D"
+ },
+ {
+  "id": "uuid-04",
+  "category": "uuid",
+  "view": "users",
+  "query": "?uid=urn:uuid:11111111-1111-4111-8111-111111111111"
+ },
+ {
+  "id": "uuid-05",
+  "category": "uuid",
+  "view": "users",
+  "query": "?uid=01890A5D-AC96-774B-BCCE-B302099A8057"
+ },
+ {
+  "id": "uuid-06",
+  "category": "uuid",
+  "view": "users",
+  "query": "?uid=00000000-0000-0000-0000-000000000000"
+ },
+ {
+  "id": "uuid-07",
+  "category": "uuid",
+  "view": "users",
+  "query": "?uid=not-a-uuid"
+ },
+ {
+  "id": "uuid-08",
+  "category": "uuid",
+  "view": "users",
+  "query": "?uid__in=11111111-1111-4111-8111-111111111111,22222222222242228222222222222222"
+ },
+ {
+  "id": "uuid-09",
+  "category": "uuid",
+  "view": "users",
+  "query": "?uid__isnull=true"
+ },
+ {
+  "id": "choice-01",
+  "category": "choice",
+  "view": "users",
+  "query": "?status=active"
+ },
+ {
+  "id": "choice-02",
+  "category": "choice",
+  "view": "users",
+  "query": "?status=bogus"
+ },
+ {
+  "id": "choice-03",
+  "category": "choice",
+  "view": "users",
+  "query": "?status=%20active"
+ },
+ {
+  "id": "choice-04",
+  "category": "choice",
+  "view": "users",
+  "query": "?status="
+ },
+ {
+  "id": "choice-05",
+  "category": "choice",
+  "view": "users",
+  "query": "?status_multi=active&status_multi=pending"
+ },
+ {
+  "id": "choice-06",
+  "category": "choice",
+  "view": "users",
+  "query": "?status_multi=active"
+ },
+ {
+  "id": "choice-07",
+  "category": "choice",
+  "view": "users",
+  "query": "?status_multi=bogus"
+ },
+ {
+  "id": "choice-08",
+  "category": "choice",
+  "view": "users",
+  "query": "?status_multi="
+ },
+ {
+  "id": "choice-09",
+  "category": "choice",
+  "view": "users",
+  "query": "?status_multi=active&status_multi="
+ },
+ {
+  "id": "choice-10",
+  "category": "choice",
+  "view": "users",
+  "query": "?status_all=active"
+ },
+ {
+  "id": "choice-11",
+  "category": "choice",
+  "view": "users",
+  "query": "?status_all=active&status_all=pending"
+ },
+ {
+  "id": "choice-12",
+  "category": "choice",
+  "view": "users",
+  "query": "?status_or_null=null"
+ },
+ {
+  "id": "choice-13",
+  "category": "choice",
+  "view": "users",
+  "query": "?status_or_null=active"
+ },
+ {
+  "id": "choice-14",
+  "category": "choice",
+  "view": "users",
+  "query": "?status_or_null=None"
+ },
+ {
+  "id": "datetime-01",
+  "category": "datetime",
+  "view": "users",
+  "query": "?created_at=2024-01-01T00:00:00Z"
+ },
+ {
+  "id": "datetime-02",
+  "category": "datetime",
+  "view": "users",
+  "query": "?created_at=2024-01-01%2005:30"
+ },
+ {
+  "id": "datetime-03",
+  "category": "datetime",
+  "view": "users",
+  "query": "?created_at=2024-01-01"
+ },
+ {
+  "id": "datetime-04",
+  "category": "datetime",
+  "view": "users",
+  "query": "?created_at=2024-1-1T00:00"
+ },
+ {
+  "id": "datetime-05",
+  "category": "datetime",
+  "view": "users",
+  "query": "?created_at=2024-01-01T05:30:00%2B05:30"
+ },
+ {
+  "id": "datetime-06",
+  "category": "datetime",
+  "view": "users",
+  "query": "?created_at=01/01/2024%2005:30"
+ },
+ {
+  "id": "datetime-07",
+  "category": "datetime",
+  "view": "users",
+  "query": "?created_at=01/01/2024"
+ },
+ {
+  "id": "datetime-08",
+  "category": "datetime",
+  "view": "users",
+  "query": "?created_at=2024-13-01"
+ },
+ {
+  "id": "datetime-09",
+  "category": "datetime",
+  "view": "users",
+  "query": "?created_at=nonsense"
+ },
+ {
+  "id": "datetime-10",
+  "category": "datetime",
+  "view": "users",
+  "query": "?created_at__gte=2024-06-01T00:00:00Z"
+ },
+ {
+  "id": "datetime-11",
+  "category": "datetime",
+  "view": "users",
+  "query": "?created_at__lt=2024-03-16"
+ },
+ {
+  "id": "datetime-12",
+  "category": "datetime",
+  "view": "users",
+  "query": "?created_at__range=2024-01-01T00:00:00Z,2024-12-31T00:00:00Z"
+ },
+ {
+  "id": "datetime-13",
+  "category": "datetime",
+  "view": "users",
+  "query": "?deleted_at__gte=2024-06-01"
+ },
+ {
+  "id": "datetime-14",
+  "category": "datetime",
+  "view": "users",
+  "query": "?deleted_at__lt=2025-01-01T00:00:00%2B00:00"
+ },
+ {
+  "id": "transform-01",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__date=2024-01-01"
+ },
+ {
+  "id": "transform-02",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__date=2024-1-1"
+ },
+ {
+  "id": "transform-03",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__date=01/01/2024"
+ },
+ {
+  "id": "transform-04",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__date=Jan%201%202024"
+ },
+ {
+  "id": "transform-05",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__date=2024-03-16"
+ },
+ {
+  "id": "transform-06",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__date=2024-03-15"
+ },
+ {
+  "id": "transform-07",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__date=bad"
+ },
+ {
+  "id": "transform-08",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__date__lt=2024-01-01"
+ },
+ {
+  "id": "transform-09",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__year=2024"
+ },
+ {
+  "id": "transform-10",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__year=2023"
+ },
+ {
+  "id": "transform-11",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__year__gte=2025"
+ },
+ {
+  "id": "transform-12",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__year=x"
+ },
+ {
+  "id": "transform-13",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__iso_year=2024"
+ },
+ {
+  "id": "transform-14",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__month=3"
+ },
+ {
+  "id": "transform-15",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__day=16"
+ },
+ {
+  "id": "transform-16",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__day=15"
+ },
+ {
+  "id": "transform-17",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__week=1"
+ },
+ {
+  "id": "transform-18",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__week_day=2"
+ },
+ {
+  "id": "transform-19",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__week_day=1"
+ },
+ {
+  "id": "transform-20",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__iso_week_day=1"
+ },
+ {
+  "id": "transform-21",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__quarter=1"
+ },
+ {
+  "id": "transform-22",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__hour=5"
+ },
+ {
+  "id": "transform-23",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__time=05:30"
+ },
+ {
+  "id": "transform-24",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__time=5:30:00"
+ },
+ {
+  "id": "transform-25",
+  "category": "transform",
+  "view": "users",
+  "query": "?created_at__time=25:00"
+ },
+ {
+  "id": "widget-01",
+  "category": "widget",
+  "view": "users",
+  "query": "?age_band_min=18"
+ },
+ {
+  "id": "widget-02",
+  "category": "widget",
+  "view": "users",
+  "query": "?age_band_max=25"
+ },
+ {
+  "id": "widget-03",
+  "category": "widget",
+  "view": "users",
+  "query": "?age_band_min=18&age_band_max=30"
+ },
+ {
+  "id": "widget-04",
+  "category": "widget",
+  "view": "users",
+  "query": "?age_band_min=x"
+ },
+ {
+  "id": "widget-05",
+  "category": "widget",
+  "view": "users",
+  "query": "?age_band_min="
+ },
+ {
+  "id": "widget-06",
+  "category": "widget",
+  "view": "users",
+  "query": "?age_band_min=18.5"
+ },
+ {
+  "id": "widget-07",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_after=2024-06-01"
+ },
+ {
+  "id": "widget-08",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_before=2024-01-01"
+ },
+ {
+  "id": "widget-09",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_after=2024-03-15&created_before=2024-03-15"
+ },
+ {
+  "id": "widget-10",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_after=2024-03-16&created_before=2024-03-16"
+ },
+ {
+  "id": "widget-11",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_after=bad"
+ },
+ {
+  "id": "widget-12",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_dt_after=2024-03-15T23:00:00Z&created_dt_before=2024-03-16T00:00:00Z"
+ },
+ {
+  "id": "widget-13",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_dt_after=2024-12-12"
+ },
+ {
+  "id": "widget-14",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_before=2024-12-31"
+ },
+ {
+  "id": "widget-15",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_before=2023-12-31"
+ },
+ {
+  "id": "widget-16",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_before=2024-12-30"
+ },
+ {
+  "id": "widget-17",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_after=2023-12-31&created_before=2023-12-31"
+ },
+ {
+  "id": "widget-18",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_after=2024-12-31"
+ },
+ {
+  "id": "widget-19",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_after=2024-02-29&created_before=2024-02-29"
+ },
+ {
+  "id": "widget-20",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_before=2024-02-28"
+ },
+ {
+  "id": "widget-21",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_after=2025-02-28&created_before=2025-02-28"
+ },
+ {
+  "id": "widget-22",
+  "category": "widget",
+  "view": "users",
+  "query": "?created_before=2025-02-28"
+ },
+ {
+  "id": "model-choice-01",
+  "category": "model-choice",
+  "view": "users",
+  "query": "?company=1"
+ },
+ {
+  "id": "model-choice-02",
+  "category": "model-choice",
+  "view": "users",
+  "query": "?company=6"
+ },
+ {
+  "id": "model-choice-03",
+  "category": "model-choice",
+  "view": "users",
+  "query": "?company=999"
+ },
+ {
+  "id": "model-choice-04",
+  "category": "model-choice",
+  "view": "users",
+  "query": "?company=x"
+ },
+ {
+  "id": "model-choice-05",
+  "category": "model-choice",
+  "view": "users",
+  "query": "?company="
+ },
+ {
+  "id": "model-choice-06",
+  "category": "model-choice",
+  "view": "users",
+  "query": "?companies=1&companies=4"
+ },
+ {
+  "id": "model-choice-07",
+  "category": "model-choice",
+  "view": "users",
+  "query": "?companies=1&companies=999"
+ },
+ {
+  "id": "model-choice-08",
+  "category": "model-choice",
+  "view": "users",
+  "query": "?companies=1"
+ },
+ {
+  "id": "declared-01",
+  "category": "declared",
+  "view": "users",
+  "query": "?not_age=18"
+ },
+ {
+  "id": "declared-02",
+  "category": "declared",
+  "view": "users",
+  "query": "?not_age=x"
+ },
+ {
+  "id": "declared-03",
+  "category": "declared",
+  "view": "users",
+  "query": "?not_country=US"
+ },
+ {
+  "id": "declared-04",
+  "category": "declared",
+  "view": "users",
+  "query": "?min_age=30"
+ },
+ {
+  "id": "declared-05",
+  "category": "declared",
+  "view": "users",
+  "query": "?min_age__gte=30"
+ },
+ {
+  "id": "declared-06",
+  "category": "declared",
+  "view": "users",
+  "query": "?age__exact=18"
+ },
+ {
+  "id": "relation-01",
+  "category": "relation",
+  "view": "users",
+  "query": "?company__name__icontains=google"
+ },
+ {
+  "id": "relation-02",
+  "category": "relation",
+  "view": "users",
+  "query": "?company__name=Google"
+ },
+ {
+  "id": "relation-03",
+  "category": "relation",
+  "view": "users",
+  "query": "?company__country=US"
+ },
+ {
+  "id": "relation-04",
+  "category": "relation",
+  "view": "users",
+  "query": "?company__name__in=Google,Nokia"
+ },
+ {
+  "id": "relation-05",
+  "category": "relation",
+  "view": "users",
+  "query": "?company__name__isnull=true"
+ },
+ {
+  "id": "relation-06",
+  "category": "relation",
+  "view": "users",
+  "query": "?company__country__isnull=true"
+ },
+ {
+  "id": "relation-07",
+  "category": "relation",
+  "view": "users",
+  "query": "?company__country__isnull=false"
+ },
+ {
+  "id": "relation-08",
+  "category": "relation",
+  "view": "users",
+  "query": "?company__departments__name__icontains=engineering"
+ },
+ {
+  "id": "relation-09",
+  "category": "relation",
+  "view": "users",
+  "query": "?company__departments__name=Sales"
+ },
+ {
+  "id": "relation-10",
+  "category": "relation",
+  "view": "users",
+  "query": "?orders__code=A"
+ },
+ {
+  "id": "relation-11",
+  "category": "relation",
+  "view": "users",
+  "query": "?orders__code__isnull=true"
+ },
+ {
+  "id": "relation-12",
+  "category": "relation",
+  "view": "users",
+  "query": "?orders__code__isnull=false"
+ },
+ {
+  "id": "relation-13",
+  "category": "relation",
+  "view": "users",
+  "query": "?orders__code=A&orders__code__in=B"
+ },
+ {
+  "id": "relation-14",
+  "category": "relation",
+  "view": "users",
+  "query": "?company__name__icontains=google&company__country=US"
+ },
+ {
+  "id": "relation-15",
+  "category": "relation",
+  "view": "users",
+  "query": "?orders__code__in=A,B",
+  "note": "DRF returns user 1 twice (one row per matching order); the library returns each user once"
+ },
+ {
+  "id": "unknown-01",
+  "category": "unknown",
+  "view": "users",
+  "query": "?password_hash=h1"
+ },
+ {
+  "id": "unknown-02",
+  "category": "unknown",
+  "view": "users",
+  "query": "?password_hash__icontains=h"
+ },
+ {
+  "id": "unknown-03",
+  "category": "unknown",
+  "view": "users",
+  "query": "?age__bogus=1"
+ },
+ {
+  "id": "unknown-04",
+  "category": "unknown",
+  "view": "users",
+  "query": "?username__gte=a"
+ },
+ {
+  "id": "unknown-05",
+  "category": "unknown",
+  "view": "users",
+  "query": "?age__whatever=10"
+ },
+ {
+  "id": "unknown-06",
+  "category": "unknown",
+  "view": "users",
+  "query": "?limit=5"
+ },
+ {
+  "id": "unknown-07",
+  "category": "unknown",
+  "view": "users",
+  "query": "?page=2"
+ },
+ {
+  "id": "unknown-08",
+  "category": "unknown",
+  "view": "users",
+  "query": "?age__gte;DROP=1"
+ },
+ {
+  "id": "search-01",
+  "category": "search",
+  "view": "users",
+  "query": "?search=john"
+ },
+ {
+  "id": "search-02",
+  "category": "search",
+  "view": "users",
+  "query": "?search=JOHN"
+ },
+ {
+  "id": "search-03",
+  "category": "search",
+  "view": "users",
+  "query": "?search=john%20doe"
+ },
+ {
+  "id": "search-04",
+  "category": "search",
+  "view": "users",
+  "query": "?search=john,zo"
+ },
+ {
+  "id": "search-05",
+  "category": "search",
+  "view": "users",
+  "query": "?search=%22john%20doe%22"
+ },
+ {
+  "id": "search-06",
+  "category": "search",
+  "view": "users",
+  "query": "?search='john%20doe'"
+ },
+ {
+  "id": "search-07",
+  "category": "search",
+  "view": "users",
+  "query": "?search="
+ },
+ {
+  "id": "search-08",
+  "category": "search",
+  "view": "users",
+  "query": "?search=%20%20"
+ },
+ {
+  "id": "search-09",
+  "category": "search",
+  "view": "users",
+  "query": "?search=google"
+ },
+ {
+  "id": "search-10",
+  "category": "search",
+  "view": "users",
+  "query": "?search=%25"
+ },
+ {
+  "id": "search-11",
+  "category": "search",
+  "view": "users",
+  "query": "?search=_"
+ },
+ {
+  "id": "search-12",
+  "category": "search",
+  "view": "users",
+  "query": "?search=john&search=zo"
+ },
+ {
+  "id": "search-13",
+  "category": "search",
+  "view": "users",
+  "query": "?search=john,,"
+ },
+ {
+  "id": "search-14",
+  "category": "search",
+  "view": "users",
+  "query": "?search=,john,"
+ },
+ {
+  "id": "search-15",
+  "category": "search",
+  "view": "users",
+  "query": "?search=%22"
+ },
+ {
+  "id": "search-16",
+  "category": "search",
+  "view": "users",
+  "query": "?search=a%00b"
+ },
+ {
+  "id": "search-17",
+  "category": "search",
+  "view": "users",
+  "query": "?search=z%C3%BCrich"
+ },
+ {
+  "id": "search-18",
+  "category": "search",
+  "view": "search_istartswith",
+  "query": "?search=jo"
+ },
+ {
+  "id": "search-19",
+  "category": "search",
+  "view": "search_istartswith",
+  "query": "?search=ohn"
+ },
+ {
+  "id": "search-20",
+  "category": "search",
+  "view": "search_iexact",
+  "query": "?search=john"
+ },
+ {
+  "id": "search-21",
+  "category": "search",
+  "view": "search_iexact",
+  "query": "?search=JOHN%20doe",
+  "expect": "differs",
+  "note": "The library splits ?search= on commas only (spaces stay inside a term; quotes group a phrase as in DRF); DRF also splits on whitespace. Here DRF requires iexact JOHN AND iexact doe; the library matches iexact \"JOHN doe\" as one term."
+ },
+ {
+  "id": "search-22",
+  "category": "search",
+  "view": "search_iregex",
+  "query": "?search=%5Ejo"
+ },
+ {
+  "id": "search-23",
+  "category": "search",
+  "view": "search_iregex",
+  "query": "?search=N$"
+ },
+ {
+  "id": "search-24",
+  "category": "search",
+  "view": "search_fts",
+  "query": "?search=john"
+ },
+ {
+  "id": "search-25",
+  "category": "search",
+  "view": "search_fts",
+  "query": "?search=google"
+ },
+ {
+  "id": "search-26",
+  "category": "search",
+  "view": "search_fts",
+  "query": "?search=inc"
+ },
+ {
+  "id": "search-27",
+  "category": "search",
+  "view": "search_int",
+  "query": "?search=1"
+ },
+ {
+  "id": "search-28",
+  "category": "search",
+  "view": "search_int",
+  "query": "?search=x"
+ },
+ {
+  "id": "search-29",
+  "category": "search",
+  "view": "search_int_exact",
+  "query": "?search=18"
+ },
+ {
+  "id": "search-30",
+  "category": "search",
+  "view": "search_int_exact",
+  "query": "?search=x"
+ },
+ {
+  "id": "search-31",
+  "category": "search",
+  "view": "search_explicit_lookup",
+  "query": "?search=JOHN"
+ },
+ {
+  "id": "search-32",
+  "category": "search",
+  "view": "search_explicit_lookup",
+  "query": "?search=goo"
+ },
+ {
+  "id": "search-33",
+  "category": "search",
+  "view": "search_orders",
+  "query": "?search=a"
+ },
+ {
+  "id": "search-34",
+  "category": "search",
+  "view": "search_orders",
+  "query": "?search=a,b",
+  "expect": "differs",
+  "note": "DRF 3.15+ applies all search terms in one filter() call, so both terms must match the same related row; the library (like DRF 3.14 and earlier) lets each term match a different related row"
+ },
+ {
+  "id": "search-35",
+  "category": "search",
+  "view": "search_iregex",
+  "query": "?search=(",
+  "expect": "node-rejects",
+  "note": "invalid regex: PostgreSQL error (500) in DRF, 400 in the library"
+ },
+ {
+  "id": "ordering-01",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=username",
+  "ordered": true
+ },
+ {
+  "id": "ordering-02",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=-username",
+  "ordered": true
+ },
+ {
+  "id": "ordering-03",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=-age,id",
+  "ordered": true
+ },
+ {
+  "id": "ordering-04",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=%20-age%20,%20id%20",
+  "ordered": true
+ },
+ {
+  "id": "ordering-05",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=password_hash",
+  "ordered": true
+ },
+ {
+  "id": "ordering-06",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=password_hash,age,id",
+  "ordered": true
+ },
+ {
+  "id": "ordering-07",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=",
+  "ordered": true
+ },
+ {
+  "id": "ordering-08",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=-",
+  "ordered": true
+ },
+ {
+  "id": "ordering-09",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=--age",
+  "ordered": true
+ },
+ {
+  "id": "ordering-10",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=age,,id",
+  "ordered": true
+ },
+ {
+  "id": "ordering-11",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=age,age,id",
+  "ordered": true
+ },
+ {
+  "id": "ordering-12",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=company__name,id",
+  "ordered": true
+ },
+ {
+  "id": "ordering-13",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=-company__name,id",
+  "ordered": true
+ },
+ {
+  "id": "ordering-14",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=company__country,-id",
+  "ordered": true
+ },
+ {
+  "id": "ordering-15",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=score,id",
+  "ordered": true
+ },
+ {
+  "id": "ordering-16",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=-score,id",
+  "ordered": true
+ },
+ {
+  "id": "ordering-17",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=created_at",
+  "ordered": true
+ },
+ {
+  "id": "ordering-18",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=age&ordering=-username",
+  "ordered": true
+ },
+ {
+  "id": "ordering-19",
+  "category": "ordering",
+  "view": "users",
+  "query": "?ordering=pk",
+  "ordered": true
+ },
+ {
+  "id": "ordering-20",
+  "category": "ordering",
+  "view": "users_default_ordering",
+  "query": "",
+  "ordered": true
+ },
+ {
+  "id": "ordering-21",
+  "category": "ordering",
+  "view": "users_default_ordering",
+  "query": "?ordering=password_hash",
+  "ordered": true
+ },
+ {
+  "id": "ordering-22",
+  "category": "ordering",
+  "view": "users_default_ordering",
+  "query": "?ordering=age,id",
+  "ordered": true
+ },
+ {
+  "id": "ordering-23",
+  "category": "ordering",
+  "view": "users_default_ordering",
+  "query": "?ordering=-age",
+  "ordered": true
+ },
+ {
+  "id": "ordering-24",
+  "category": "ordering",
+  "view": "ordering_all",
+  "query": "?ordering=password_hash,id",
+  "ordered": true
+ },
+ {
+  "id": "ordering-25",
+  "category": "ordering",
+  "view": "ordering_all",
+  "query": "?ordering=-created_at",
+  "ordered": true
+ },
+ {
+  "id": "ordering-26",
+  "category": "ordering",
+  "view": "ordering_all",
+  "query": "?ordering=company__name",
+  "ordered": true
+ },
+ {
+  "id": "combined-01",
+  "category": "combined",
+  "view": "users",
+  "query": "?age__gte=18&status=active&company__name__icontains=google&ordering=-age,id",
+  "ordered": true
+ },
+ {
+  "id": "combined-02",
+  "category": "combined",
+  "view": "users",
+  "query": "?age__gte=18&search=john&ordering=username",
+  "ordered": true
+ },
+ {
+  "id": "combined-03",
+  "category": "combined",
+  "view": "users",
+  "query": "?search=john&ordering=-age,id",
+  "ordered": true
+ },
+ {
+  "id": "combined-04",
+  "category": "combined",
+  "view": "users",
+  "query": "?company__country=US&ordering=company__name,-id",
+  "ordered": true
+ },
+ {
+  "id": "combined-05",
+  "category": "combined",
+  "view": "users",
+  "query": "?age__gte=hello&uid=bad",
+  "ordered": false
+ },
+ {
+  "id": "combined-06",
+  "category": "combined",
+  "view": "users",
+  "query": "?status=bogus&age=x&created_after=bad",
+  "ordered": false
+ },
+ {
+  "id": "combined-07",
+  "category": "combined",
+  "view": "users",
+  "query": "?is_active=true&search=o&ordering=-score",
+  "ordered": true
+ },
+ {
+  "id": "combined-08",
+  "category": "combined",
+  "view": "users",
+  "query": "?orders__code=A&search=john&ordering=id",
+  "ordered": true
+ }
+]
